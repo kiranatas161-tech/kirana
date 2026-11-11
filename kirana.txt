@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Portfolio</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6fb;
+  color: #263248;
+  line-height: 1.7;
+}
+
+header {
+  background: #253858;
+  color: white;
+  padding: 25px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+header h2 { font-size: 25px; }
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+nav a:hover { color: #91c8ff; }
+
+.hero {
+  text-align: center;
+  padding: 55px 20px;
+  background: #dce8fa;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  margin-bottom: 15px;
+}
+
+.hero h1 {
+  font-size: 32px;
+  color: #253858;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 35px 20px;
+}
+
+section {
+  margin-bottom: 35px;
+}
+
+h2.section-title {
+  color: #253858;
+  border-left: 5px solid #4385d6;
+  padding-left: 12px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 3px 12px #0000000d;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 11px;
+  margin: 7px 0 13px;
+  border: 1px solid #ccd3df;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+button {
+  background: #3478c9;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin: 5px 4px 5px 0;
+}
+
+button:hover { background: #245b9e; }
+
+.delete { background: #d9534f; }
+.edit { background: #e5a52b; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 20px;
+}
+
+.project img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.project h3 { color: #253858; }
+
+footer {
+  background: #253858;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+.admin {
+  background: #e7edf7;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  display: none;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+@media(max-width:600px) {
+  header { justify-content: center; }
+  nav a { margin: 5px; }
+  .hero h1 { font-size: 25px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>MY PORTFOLIO</h2>
+  <nav>
+    <a href="#about">เกี่ยวกับฉัน</a>
+    <a href="#education">การศึกษา</a>
+    <a href="#works">ผลงาน</a>
+    <a href="#contact">ติดต่อ</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <img id="profileDisplay"
+  class="profile-img"
+  src="https://placehold.co/300x300?text=Profile">
+
+  <h1 id="nameDisplay">ชื่อ - นามสกุล</h1>
+  <p id="jobDisplay">นักเรียน / นักศึกษา</p>
+</div>
+
+<div class="container">
+
+<section id="about">
+  <h2 class="section-title">เกี่ยวกับฉัน</h2>
+  <div class="card">
+    <p id="aboutDisplay">แนะนำตัวเองได้ที่นี่</p>
+  </div>
+</section>
+
+<section id="education">
+  <h2 class="section-title">ประวัติการศึกษา</h2>
+  <div id="educationList"></div>
+</section>
+
+<section id="works">
+  <h2 class="section-title">ผลงานของฉัน</h2>
+  <div class="gallery" id="projectList"></div>
+</section>
+
+<section id="contact">
+  <h2 class="section-title">ช่องทางติดต่อ</h2>
+  <div class="card">
+    <p id="emailDisplay">Email: example@email.com</p>
+    <p id="phoneDisplay">โทรศัพท์: 000-000-0000</p>
+    <p id="socialDisplay">Facebook: -</p>
+  </div>
+</section>
+
+<section id="admin">
+  <h2 class="section-title">จัดการข้อมูล Portfolio</h2>
+
+  <div class="admin">
+
+    <h3>ข้อมูลส่วนตัว</h3>
+
+    <label>ชื่อ - นามสกุล</label>
+    <input id="nameInput" placeholder="กรอกชื่อ-นามสกุล">
+
+    <label>อาชีพ / สถานะ</label>
+    <input id="jobInput" placeholder="เช่น นักเรียน นักศึกษา">
+
+    <label>ประวัติส่วนตัว</label>
+    <textarea id="aboutInput"
+    placeholder="แนะนำตัวเอง"></textarea>
+
+    <label>รูปโปรไฟล์</label>
+    <input type="file" id="profileInput" accept="image/*">
+
+    <img id="profilePreview" class="preview">
+
+    <label>อีเมล</label>
+    <input id="emailInput" placeholder="Email">
+
+    <label>เบอร์โทรศัพท์</label>
+    <input id="phoneInput" placeholder="เบอร์โทร">
+
+    <label>Facebook / Social Media</label>
+    <input id="socialInput" placeholder="ช่องทางติดต่อ">
+
+    <button onclick="saveProfile()">บันทึกข้อมูลส่วนตัว</button>
+
+    <hr style="margin:25px 0">
+
+    <h3>เพิ่มข้อมูลการศึกษา</h3>
+
+    <input id="schoolInput"
+    placeholder="ชื่อสถานศึกษา">
+
+    <input id="degreeInput"
+    placeholder="ระดับการศึกษา / สาขาวิชา">
+
+    <input id="yearInput"
+    placeholder="ปีที่ศึกษา เช่น 2565 - 2568">
+
+    <button onclick="addEducation()">เพิ่มข้อมูลการศึกษา</button>
+
+    <div id="adminEducation"></div>
+
+    <hr style="margin:25px 0">
+
+    <h3>เพิ่มผลงาน</h3>
+
+    <input id="projectName"
+    placeholder="ชื่อผลงาน">
+
+    <textarea id="projectDetail"
+    placeholder="รายละเอียดผลงาน"></textarea>
+
+    <label>เลือกรูปภาพผลงาน (เลือกได้หลายรูป)</label>
+    <input type="file" id="projectImages"
+    accept="image/*" multiple>
+
+    <button onclick="addProject()">เพิ่มผลงาน</button>
+
+    <div id="adminProjects"></div>
+
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>© 2026 My Portfolio | Created by Me</p>
+</footer>
+
+<script>
+let profileImage = "";
+let educations = [];
+let projects = [];
+
+function readImage(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function getData() {
+  try {
+    const profile = JSON.parse(
+      localStorage.getItem("profile") || "{}"
+    );
+
+    document.getElementById("nameDisplay").textContent =
+      profile.name || "ชื่อ - นามสกุล";
+
+    document.getElementById("jobDisplay").textContent =
+      profile.job || "นักเรียน / นักศึกษา";
+
+    document.getElementById("aboutDisplay").textContent =
+      profile.about || "แนะนำตัวเองได้ที่นี่";
+
+    document.getElementById("emailDisplay").textContent =
+      "Email: " + (profile.email || "-");
+
+    document.getElementById("phoneDisplay").textContent =
+      "โทรศัพท์: " + (profile.phone || "-");
+
+    document.getElementById("socialDisplay").textContent =
+      "Social: " + (profile.social || "-");
+
+    if(profile.image) {
+      profileImage = profile.image;
+      document.getElementById("profileDisplay").src =
+        profile.image;
+    }
+
+    educations = JSON.parse(
+      localStorage.getItem("educations") || "[]"
+    );
+
+    projects = JSON.parse(
+      localStorage.getItem("projects") || "[]"
+    );
+
+    renderEducation();
+    renderProjects();
+  } catch(e) {
+    alert("ไม่สามารถอ่านข้อมูลได้");
+  }
+}
+
+async function saveProfile() {
+  try {
+    const file = document.getElementById("profileInput").files[0];
+
+    if(file) {
+      profileImage = await readImage(file);
+    }
+
+    const profile = {
+      name: document.getElementById("nameInput").value,
+      job: document.getElementById("jobInput").value,
+      about: document.getElementById("aboutInput").value,
+      email: document.getElementById("emailInput").value,
+      phone: document.getElementById("phoneInput").value,
+      social: document.getElementById("socialInput").value,
+      image: profileImage
+    };
+
+    localStorage.setItem("profile", JSON.stringify(profile));
+
+    alert("บันทึกข้อมูลเรียบร้อยแล้ว");
+    getData();
+
+  } catch(e) {
+    alert("เกิดข้อผิดพลาดในการบันทึก");
+  }
+}
+
+document.getElementById("profileInput")
+.addEventListener("change", async function() {
+  const file = this.files[0];
+  if(file) {
+    const preview = document.getElementById("profilePreview");
+    preview.src = await readImage(file);
+    preview.style.display = "block";
+  }
+});
+
+function addEducation() {
+  const school = document.getElementById("schoolInput").value;
+  const degree = document.getElementById("degreeInput").value;
+  const year = document.getElementById("yearInput").value;
+
+  if(!school || !degree) {
+    alert("กรุณากรอกข้อมูลการศึกษา");
+    return;
+  }
+
+  educations.push({school, degree, year});
+
+  localStorage.setItem("educations", JSON.stringify(educations));
+
+  document.getElementById("schoolInput").value = "";
+  document.getElementById("degreeInput").value = "";
+  document.getElementById("yearInput").value = "";
+
+  renderEducation();
+}
+
+function renderEducation() {
+  const list = document.getElementById("educationList");
+  const admin = document.getElementById("adminEducation");
+
+  list.innerHTML = "";
+  admin.innerHTML = "<h4>รายการข้อมูลการศึกษา</h4>";
+
+  educations.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const h = document.createElement("h3");
+    h.textContent = item.school;
+
+    const p = document.createElement("p");
+    p.textContent = item.degree + " | " + item.year;
+
+    card.append(h, p);
+    list.appendChild(card);
+
+    const btn = document.createElement("button");
+    btn.className = "delete";
+    btn.textContent = "ลบ";
+    btn.onclick = () => deleteEducation(index);
+
+    admin.append(
+      document.createTextNode(item.school + " "),
+      btn,
+      document.createElement("br")
+    );
+  });
+}
+
+function deleteEducation(index) {
+  if(confirm("ต้องการลบข้อมูลนี้หรือไม่?")) {
+    educations.splice(index, 1);
+    localStorage.setItem("educations", JSON.stringify(educations));
+    renderEducation();
+  }
+}
+
+async function addProject() {
+  const name = document.getElementById("projectName").value;
+  const detail = document.getElementById("projectDetail").value;
+  const files = [...document.getElementById("projectImages").files];
+
+  if(!name) {
+    alert("กรุณากรอกชื่อผลงาน");
+    return;
+  }
+
+  try {
+    const images = await Promise.all(files.map(readImage));
+
+    projects.push({name, detail, images});
+
+    localStorage.setItem("projects", JSON.stringify(projects));
+
+    document.getElementById("projectName").value = "";
+    document.getElementById("projectDetail").value = "";
+    document.getElementById("projectImages").value = "";
+
+    renderProjects();
+
+  } catch(e) {
+    alert("ไม่สามารถเพิ่มรูปภาพได้");
+  }
+}
+
+function renderProjects() {
+  const list = document.getElementById("projectList");
+  const admin = document.getElementById("adminProjects");
+
+  list.innerHTML = "";
+  admin.innerHTML = "<h4>รายการผลงาน</h4>";
+
+  projects.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "card project";
+
+    const title = document.createElement("h3");
+    title.textContent = item.name;
+
+    const detail = document.createElement("p");
+    detail.textContent = item.detail || "";
+
+    card.append(title, detail);
+
+    (item.images || []).forEach(src => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = item.name;
+      card.appendChild(img);
+    });
+
+    list.appendChild(card);
+
+    const name = document.createElement("span");
+    name.textContent = item.name + " ";
+
+    const del = document.createElement("button");
+    del.className = "delete";
+    del.textContent = "ลบผลงาน";
+    del.onclick = () => deleteProject(index);
+
+    admin.append(name, del, document.createElement("br"));
+  });
+}
+
+function deleteProject(index) {
+  if(confirm("ต้องการลบผลงานนี้หรือไม่?")) {
+    projects.splice(index, 1);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    renderProjects();
+  }
+}
+
+getData();
+</script>
+
+</body>
+</html>
